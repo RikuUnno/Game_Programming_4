@@ -1,6 +1,8 @@
 #pragma once
+#include "KeyInput.h"
 
 class SceneBase
+	: public KeyInput
 {
 public:
 	SceneBase() {}

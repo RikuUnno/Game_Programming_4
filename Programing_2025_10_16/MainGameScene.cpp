@@ -24,11 +24,14 @@ void MainGameScene::End()
 
 SceneBase* MainGameScene::Update()
 {
+    BeginKeyInput();
 
-    if (CheckHitKey(KEY_INPUT_T))
+    if (IsKeyInputTrigger(KEY_INPUT_Z))
     {
         return new TitleScene();
     }
+
+    EndKeyInput();
 
 	return this;
 }
@@ -36,5 +39,5 @@ SceneBase* MainGameScene::Update()
 void MainGameScene::Draw()
 {
 	DrawString(0, 0, "MainGame!", 0xFFFFFF);
-	DrawString(0, 20, "T TITLE", 0xFFFFFF);
+	DrawString(0, 20, "Z TITLE", 0xFFFFFF);
 }

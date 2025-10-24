@@ -24,10 +24,15 @@ void SettingScene::End()
 
 SceneBase* SettingScene::Update()
 {
-    if (CheckHitKey(KEY_INPUT_T))
+    BeginKeyInput();
+
+    if (IsKeyInputTrigger(KEY_INPUT_T))
     {
         return new TitleScene();
     }
+
+    EndKeyInput();
+
     return this;
 }
 

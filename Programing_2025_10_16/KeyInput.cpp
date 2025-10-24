@@ -1,10 +1,11 @@
 #include "KeyInput.h"
 #include "DxLib.h"
+#include <algorithm>
 
 KeyInput::KeyInput()
 {
-    m_currntKey[256] = { NULL };
-    m_previousKey[256] = { NULL };
+    std::fill(std::begin(m_currntKey), std::end(m_currntKey), 0);
+    std::fill(std::begin(m_previousKey), std::end(m_previousKey), 0);
 	IsKeyInputON = false;
 	m_repeatedTime = 10.0f;
 	m_repeatedTimer = m_repeatedTime;

@@ -25,14 +25,18 @@ void TitleScene::End()
 
 SceneBase* TitleScene::Update()
 {
-	if (CheckHitKey(KEY_INPUT_X))
+	BeginKeyInput();
+
+	if (IsKeyInputTrigger(KEY_INPUT_X))
 	{
 		return new SettingScene();
 	}
-	else if (CheckHitKey(KEY_INPUT_Z))
+	else if (IsKeyInputTrigger(KEY_INPUT_Z))
 	{
 		return new GameRoot();
 	}
+
+	EndKeyInput();
 
 	return this;
 }
