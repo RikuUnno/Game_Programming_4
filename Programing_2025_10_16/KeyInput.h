@@ -10,16 +10,14 @@
 class KeyInput // キーの処理
 {
 private:
-	int m_currntKey;		// 現在のキー
-	int m_previousKey;		// 過去（前フレーム）のキー
-	bool IsKeyInputON;		// 入力を許可
-	double m_repeatedTime;	// 繰り返す間隔
-	double m_repeatedTimer;  // 繰り返す時間を測るやつ
+	char m_currntKey[256];		// 現在のキー
+	char m_previousKey[256];	// 過去（前フレーム）のキー
+	bool IsKeyInputON;			// 入力を許可
+	double m_repeatedTime;		// 繰り返す間隔
+	double m_repeatedTimer;		// 繰り返す時間を測るやつ
 
-private:
-	Time timer;
+protected:
 
-public:
 	KeyInput();
 	virtual ~KeyInput();
 

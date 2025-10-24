@@ -3,8 +3,8 @@
 
 KeyInput::KeyInput()
 {
-	m_currntKey = NULL;
-	m_previousKey = NULL;
+    m_currntKey[256] = { NULL };
+    m_previousKey[256] = { NULL };
 	IsKeyInputON = false;
 	m_repeatedTime = 10.0f;
 	m_repeatedTimer = m_repeatedTime;
@@ -19,11 +19,11 @@ bool KeyInput::IsKeyInputTrigger(int KeyCode)
 
 	bool flag = false;
 
-	CheckHitKey(KeyCode) ? m_currntKey = KeyCode : m_currntKey = NULL; // 現在の押下情報の更新
+    GetHitKeyStateAll(m_currntKey); // 現在の押下情報の更新
 
-	((m_currntKey != m_previousKey) && (m_currntKey != NULL)) ? flag = true : flag = false;
+	((m_currntKey[KeyCode] != m_previousKey[KeyCode]) && (m_currntKey[KeyCode] != NULL)) ? flag = true : flag = false;
 
-	m_previousKey = m_currntKey; // 次フレームの為に入れ替え
+	m_previousKey[KeyCode] = m_currntKey[KeyCode]; // 次フレームの為に入れ替え
 
 #ifdef _DEBUG
     // デバッグ表示
@@ -46,11 +46,11 @@ bool KeyInput::IsKeyInputReleased(int KeyCode)
 
 	bool flag = false;
 
-	CheckHitKey(KeyCode) ? m_currntKey = KeyCode : m_currntKey = NULL; // 現在の押下情報の更新
+    GetHitKeyStateAll(m_currntKey); // 現在の押下情報の更新
 
-	((m_previousKey == KeyCode) && (m_currntKey == NULL)) ? flag = true : flag = false;
+	((m_previousKey[KeyCode] == 1) && (m_currntKey[KeyCode] == NULL)) ? flag = true : flag = false;
 
-	m_previousKey = m_currntKey; // 次フレームの為に入れ替え
+	m_previousKey[KeyCode] = m_currntKey[KeyCode]; // 次フレームの為に入れ替え
 
 #ifdef _DEBUG
     // デバッグ表示
@@ -64,13 +64,14 @@ bool KeyInput::IsKeyInputRepeated(int KeyCode)
 {
     if (!IsKeyInputON) return false;
 
-    timer.Update(); // デルタタイム  更新
     bool flag = false;
 
+    GetHitKeyStateAll(m_currntKey);
+
     // キーが押されている場合
-    if (CheckHitKey(KeyCode))
+    if (m_currntKey[KeyCode] == 1)
     {
-        m_repeatedTimer += m_repeatedTime * timer.DeltaTime();
+        m_repeatedTimer += m_repeatedTime * Time::GetInstance().DeltaTime();
 
         // 一定時間を超えたらリピート判定
         if (m_repeatedTimer >= m_repeatedTime)
@@ -87,7 +88,7 @@ bool KeyInput::IsKeyInputRepeated(int KeyCode)
 
 #ifdef _DEBUG
     // デバッグ表示
-    DrawFormatString(0, 75, 0xFFFFFF, "DeltaTime: %f", timer.DeltaTime());
+    DrawFormatString(0, 75, 0xFFFFFF, "DeltaTime: %f", Time::GetInstance().DeltaTime());
     DrawFormatString(0, 90, 0xFFFFFF, "m_repeatedTimer: %f", m_repeatedTimer);
     DrawFormatString(0, 105, 0xFFFFFF, "Flag: %d", flag);
 #endif // _DEBUG

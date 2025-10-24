@@ -12,12 +12,19 @@ Time::Time()
 // デストラクタ
 Time::~Time()
 {
+
+}
+
+Time& Time::GetInstance()
+{
+	static Time instance;
+	return instance;
 }
 
 // 更新
 void Time::Update()
 {
-	int now = GetNowCount();
+	double now = GetNowCount();
 
 	if (now < m_currentFrame) now += 0xFFFFFFFF;
 
