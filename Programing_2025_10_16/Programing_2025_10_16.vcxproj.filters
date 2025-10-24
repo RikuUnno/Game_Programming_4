@@ -25,6 +25,18 @@
     <Filter Include="ヘッダー ファイル\Scene\Scenes">
       <UniqueIdentifier>{16192db6-15a4-458f-bb97-419c35826480}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\KeyInput">
+      <UniqueIdentifier>{55850a82-899f-4722-98af-d5ca49afc37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\KeyInput">
+      <UniqueIdentifier>{cddd7223-4268-4bfe-a8a2-d2e59f5b5b20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Time">
+      <UniqueIdentifier>{0ef4a5c3-ca6f-4315-88d2-2ae582d66daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Time">
+      <UniqueIdentifier>{59a27e7a-0435-4ce7-afd6-da4ac9042fc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,6 +56,12 @@
     </ClCompile>
     <ClCompile Include="GameRoot.cpp">
       <Filter>ソース ファイル\Scene\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyInput.cpp">
+      <Filter>ソース ファイル\KeyInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>ソース ファイル\Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="GameRoot.h">
       <Filter>ヘッダー ファイル\Scene\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyInput.h">
+      <Filter>ヘッダー ファイル\KeyInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>ヘッダー ファイル\Time</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
