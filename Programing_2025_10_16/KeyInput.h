@@ -10,11 +10,11 @@
 class KeyInput // キーの処理
 {
 private:
+	bool IsKeyInputON;			// 入力を許可
 	char m_currntKey[256];		// 現在のキー
 	char m_previousKey[256];	// 過去（前フレーム）のキー
-	bool IsKeyInputON;			// 入力を許可
-	double m_repeatedTime;		// 繰り返す間隔
-	double m_repeatedTimer;		// 繰り返す時間を測るやつ
+	double m_repeatedTime[256];		// 繰り返す間隔
+	double m_repeatedTimer[256];		// 繰り返す時間を測るやつ
 
 protected:
 
@@ -28,10 +28,13 @@ public:
 	bool IsKeyInputRepeated(int KeyCode);	// 決まった感覚で断続的に返す
 
 public:
-	void SetInputRepeatedTime(float SetTime); // 断続的に返す場合の時間セッター
+	void SetInputRepeatedTime(int KeyCode, double SetTime); // 断続的に返す場合の時間セッター
 
 public:
 	void BeginKeyInput();
 	void EndKeyInput();
 
 };
+
+// キーを押された時に範囲チェックを入れたほうがいいおそらく0~255
+// シーン遷移を入れるとnewされるので前回のprevionsの値を持っていないのでおそらくその部分で２度押したことになっていると思われ

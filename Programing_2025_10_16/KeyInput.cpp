@@ -4,11 +4,11 @@
 
 KeyInput::KeyInput()
 {
+    IsKeyInputON = false;
     std::fill(std::begin(m_currntKey), std::end(m_currntKey), 0);
     std::fill(std::begin(m_previousKey), std::end(m_previousKey), 0);
-	IsKeyInputON = false;
-	m_repeatedTime = 10.0f;
-	m_repeatedTimer = m_repeatedTime;
+    std::fill(std::begin(m_repeatedTime), std::end(m_repeatedTime), 0.0);
+    std::fill(std::begin(m_repeatedTimer), std::end(m_repeatedTimer), 0.0);
 }
 
 KeyInput::~KeyInput()
@@ -72,19 +72,19 @@ bool KeyInput::IsKeyInputRepeated(int KeyCode)
     // キーが押されている場合
     if (m_currntKey[KeyCode] == 1)
     {
-        m_repeatedTimer += m_repeatedTime * Time::GetInstance().DeltaTime();
+        m_repeatedTimer[KeyCode] += m_repeatedTime[KeyCode] * Time::GetInstance().DeltaTime();
 
         // 一定時間を超えたらリピート判定
-        if (m_repeatedTimer >= m_repeatedTime)
+        if (m_repeatedTimer[KeyCode] >= m_repeatedTime[KeyCode])
         {
             flag = true;
-            m_repeatedTimer = 0.0f; // タイマーリセットして次
+            m_repeatedTimer[KeyCode] = 0.0f; // タイマーリセットして次
         }
     }
     else
     {
         // キーが離されたらリセット
-        m_repeatedTimer = m_repeatedTime;
+        m_repeatedTimer[KeyCode] = m_repeatedTime[KeyCode];
     }
 
 #ifdef _DEBUG
@@ -97,9 +97,9 @@ bool KeyInput::IsKeyInputRepeated(int KeyCode)
     return flag;
 }
 
-void KeyInput::SetInputRepeatedTime(float SetTime)
+void KeyInput::SetInputRepeatedTime(int KeyCode, double SetTime)
 {
-	m_repeatedTime = SetTime; // 引数内の数値に変更	
+	m_repeatedTime[KeyCode] = SetTime; // 引数内の数値に変更	
 }
 
 void KeyInput::BeginKeyInput()
